@@ -1,3 +1,3 @@
 
-// Register all component exports so that the can be imported like so `import { JumbotronContainer } from './containers/jumbotron';` in App.js
+// Register all component exports here so that the can be imported like so `import { Jumbotron } from '../components/';` in containers/jumbotron.js
 export { default as Jumbotron } from './jumbotron';
