@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import { Home, SignIn, SignUp, Browse }  from './pages';
-import { IsUserRedirect } from './helpers/routes';
+import { IsUserRedirect, ProtectedRoute } from './helpers/routes';
 import * as ROUTES from './constants/routes';
 
 export default function App() {
@@ -10,7 +10,10 @@ export default function App() {
     return (
         <Router>
              <Route exact path={ROUTES.HOME}>
-                <Home/>
+
+                <IsUserRedirect user={user} loggedInPath={ROUTES.BROWSE} path={ROUTES.HOME}>
+                  <Home/>
+               </IsUserRedirect>
              </Route>
              <Route exact path={ROUTES.SIGN_IN}>
                 {/* Check if use is loggedin */}
@@ -24,7 +27,9 @@ export default function App() {
                </IsUserRedirect>
              </Route>
              <Route exact path={ROUTES.BROWSE}>
-                <Browse/>
+                <ProtectedRoute user={user} path={ROUTES.BROWSE}>
+                  <Browse />
+               </ProtectedRoute>
              </Route>
         </Router>
     );
