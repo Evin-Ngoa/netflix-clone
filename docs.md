@@ -13,3 +13,12 @@ Basic Route Implementation
         </Route>
 </Router>
 `
+
+import { useHistory } from 'react-router-dom';
+enables history.push
+
+// Firebase
+Enable Login
+> Authentication
+> Get Started 
+> Enable email/password 
