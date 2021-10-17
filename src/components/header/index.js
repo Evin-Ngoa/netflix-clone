@@ -22,7 +22,7 @@ import {
 
 export default function Header({ bg = true, children, ...restProps }) {
     return bg ? (
-      <Background data-testid="header-bg" {...restProps}>
+      <Background {...restProps}>
         {children}
       </Background>
     ) : (
@@ -51,7 +51,7 @@ Header.Search = function HeaderSearch({ searchTerm, setSearchTerm, ...restProps 
 
   return (
     <Search {...restProps}>
-      <SearchIcon onClick={() => setSearchActive((searchActive) => !searchActive)} data-testid="search-click">
+      <SearchIcon onClick={() => setSearchActive((searchActive) => !searchActive)} >
         <img src="/images/icons/search.png" alt="Search" />
       </SearchIcon>
       <SearchInput
@@ -59,7 +59,6 @@ Header.Search = function HeaderSearch({ searchTerm, setSearchTerm, ...restProps 
         onChange={({ target }) => setSearchTerm(target.value)}
         placeholder="Search films and series"
         active={searchActive}
-        data-testid="search-input"
       />
     </Search>
   );

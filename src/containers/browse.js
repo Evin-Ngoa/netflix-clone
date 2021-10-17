@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
+import Fuse from 'fuse.js';
 import { SelectProfileContainer } from "../containers/profile";
+import { FooterContainer } from './footer';
 import { FirebaseContext } from "../context/firebase";
 import { Header, Loading } from "../components";
 import * as ROUTES from '../constants/routes';
@@ -12,6 +14,7 @@ export function BrowseContainer({ slides }) {
     const [searchTerm, setSearchTerm] = useState('');
     const { firebase } = useContext(FirebaseContext);
     const user = firebase.auth().currentUser || {};
+    const [slideRows, setSlideRows] = useState([]);
 
     // make it loader gif for 3000 milliseconds
     useEffect(() => {
@@ -20,7 +23,21 @@ export function BrowseContainer({ slides }) {
         }, 3000);
     }, [profile.displayName]);
 
+    useEffect(() => {
+        setSlideRows(slides[category]);
+    }, [slides, category]);
     
+    useEffect(() => {
+        const fuse = new Fuse(slideRows, { keys: ['data.description', 'data.title', 'data.genre'] });
+        const results = fuse.search(searchTerm).map(({ item }) => item);
+
+        if (slideRows.length > 0 && searchTerm.length > 3 && results.length > 0) {
+            setSlideRows(results);
+        } else {
+            setSlideRows(slides[category]);
+        }
+    }, [searchTerm]);
+
     return profile.displayName ? (
         <> 
             {loading ? <Loading src={user.photoURL} /> : <Loading.ReleaseBody />}
@@ -63,6 +80,10 @@ export function BrowseContainer({ slides }) {
                 <Header.PlayButton>Play</Header.PlayButton>
                 </Header.Feature>
             </Header>
+
+            <FooterContainer />
         </>
-        ) : <SelectProfileContainer user={user} setProfile={setProfile} /> ;
+    ) : (
+        <SelectProfileContainer user={user} setProfile={setProfile} />
+    );
 }
