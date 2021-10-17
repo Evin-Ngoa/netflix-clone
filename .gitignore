@@ -1,5 +1,6 @@
 # bye
 src/lib/firebase.js
+firebase.prod.js
 
 # dependencies
 /node_modules

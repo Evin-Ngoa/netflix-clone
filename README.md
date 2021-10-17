@@ -3,6 +3,11 @@ A react netflix clone
 
 Use the components design architecture
 
+## Setup Firebase 
+> Rename src/lib/firebase.prod.js to firebase.js
+> Login to firebase and add the configurations. 
+> Uncomment the seedDatabase(firebase); and reload ONCE to seed firebase with data then comment to prevent data duplication.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
