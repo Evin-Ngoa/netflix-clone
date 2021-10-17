@@ -7,12 +7,15 @@ export function IsUserRedirect({ user, loggedInPath, children, ...rest }) {
     <Route
       {...rest}
       render={() => {
-        //   If there is no user return login component children
-        if (!user) {
+        // If there is no user return login component children
+        // returns { user : null } if empty
+        // if (!user) {
+        if (user.user === null) {
           return children;
         }
 
-        if (user) {
+        // if (user) {
+        if (user.user !== null) {
           return (
             <Redirect
               to={{
@@ -36,12 +39,14 @@ export function ProtectedRoute({ user, children, ...rest }) {
         {...rest}
         render={({ location }) => {
             //   If there is user then already loggedin therefore can access children componenets
-            if (user) {
+            // if (user) {
+            if (user.user !== null) {
                 return children;
             }
             
             // else redirect to login
-            if (!user) {
+            // if (!user) {
+            if (user.user === null) {
                 return (
                     <Redirect
                         to={{
