@@ -22,3 +22,7 @@ Enable Login
 > Authentication
 > Get Started 
 > Enable email/password 
+
+### Login User Details
+netflixclone.user@gmail.com
+12345678
