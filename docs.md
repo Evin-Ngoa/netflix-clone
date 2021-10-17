@@ -26,3 +26,20 @@ Enable Login
 ### Login User Details
 netflixclone.user@gmail.com
 12345678
+
+### import and exports
+> Export with default will require import as 
+export default function Auth() 
+
+import App from './app';
+
+> Export without default will require import as
+
+export function Auth() 
+
+import { App } from './app';
+
+> If you add an index.js having all exports
+then can be imported as 
+import { App } from './app'; format
+

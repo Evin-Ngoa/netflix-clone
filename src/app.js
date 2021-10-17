@@ -2,10 +2,12 @@ import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import { Home, SignIn, SignUp, Browse }  from './pages';
 import { IsUserRedirect, ProtectedRoute } from './helpers/routes';
+import { useAuthListener } from './hooks';
 import * as ROUTES from './constants/routes';
 
 export default function App() {
-   const user = {};
+   // Can get user details if logged in
+   const user = useAuthListener();
 
     return (
         <Router>
